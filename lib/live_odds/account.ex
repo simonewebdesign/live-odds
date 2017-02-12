@@ -44,7 +44,7 @@ defmodule LiveOdds.Account do
   @doc """
   Deposit money.
   """
-  @spec credit(pos_integer) :: :ok
+  @spec credit(pos_integer) :: :ok | :error
   def credit(amount) do
     send(:account, {{:credit, amount}, self()})
     receive do
@@ -59,7 +59,11 @@ defmodule LiveOdds.Account do
   """
   @spec debit(pos_integer) :: :ok | :error
   def debit(amount) do
-    :ok
+    send(:account, {{:debit, amount}, self()})
+    receive do
+      {:debit, :ok} -> :ok
+      {:debit, error} -> error
+    end
   end
 
 

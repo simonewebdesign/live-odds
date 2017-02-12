@@ -4,42 +4,40 @@ defmodule AccountTest do
   alias LiveOdds.Account
 
 
+  # test "it works" do
+  #   :ok = Account.start()
+  #   assert 0 == Account.balance()
+  #   :ok = Account.credit(50)
+  #   assert 50 == Account.balance()
+  #   :ok = Account.credit(100)
+  #   :ok = Account.debit(30)
+  #   assert 120 == Account.balance()
+  #   :ok = Account.stop()
+  # end
+
   setup do
     :ok = Account.start()
   end
 
-  # test "open an account" do
-    # assert :ok == Account.start()
-  # end
+
+  test "close an account" do
+    :ok = Account.stop()
+  end
 
 
   test "ask for current balance" do
-    # assert :ok == Account.start()
-    assert 0 == Account.balance()
+
   end
 
 
   test "credit" do
-    # {:ok, pid} = Account.start()
-    # msg = {:credit, 50}
-    # send(pid, {msg, self()})
 
-    # assert_receive(:ok)
-    # assert :ok == Account.start()
-    assert :ok == Account.credit(50)
   end
 
 
   test "debit" do
-    assert :ok == Account.credit(100)
-    assert :ok == Account.debit(30)
-    assert 70 == Account.balance()
+
   end
-
-  # test "close an account" do
-  #   assert :ok == Account.stop()
-  # end
-
 
   # test "deposit and then withdraw" do
   #   {:ok, pid} = Account.start()
