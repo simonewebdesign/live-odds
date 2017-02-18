@@ -1,6 +1,5 @@
-# LiveOdds
+# LiveOdds [![Build Status](https://travis-ci.org/simonewebdesign/live-odds.svg?branch=master)](https://travis-ci.org/simonewebdesign/live-odds) [![Coverage Status](https://coveralls.io/repos/github/simonewebdesign/live-odds/badge.svg?branch=master)](https://coveralls.io/github/simonewebdesign/live-odds?branch=master)
 
-**TODO: Add description**
 
 ## Installation
 
