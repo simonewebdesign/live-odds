@@ -5,7 +5,7 @@ defmodule AccountTest do
 
 
   setup do
-    :ok = Account.start()
+    {:ok, _pid} = Account.start()
 
     on_exit(fn() ->
       :ok = Account.stop()
