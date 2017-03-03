@@ -3,10 +3,9 @@ defmodule LiveOdds.Account do
   A bank account.
   """
 
-
   @doc "Open a bank account."
-  @spec start() :: {:ok, pid} | {:error, {:already_started, pid} | term}
-  def start do
+  @spec start_link() :: {:ok, pid} | {:error, {:already_started, pid} | term}
+  def start_link do
     Agent.start(fn -> 0 end, [name: :account])
   end
 

@@ -22,7 +22,8 @@ defmodule LiveOdds.Mixfile do
      {:credo, "> 0.0.0", only: [:dev, :test]},
      {:ex_doc, "> 0.0.0", only: :dev},
      {:excoveralls, "> 0.0.0", only: :test},
-     {:dialyxir, "> 0.0.0", only: :dev, runtime: false}
+     {:dialyxir, "> 0.0.0", only: :dev, runtime: false},
+     {:pubsub, "0.0.2"},
     ]
   end
 end

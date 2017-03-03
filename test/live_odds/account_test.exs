@@ -3,9 +3,8 @@ defmodule AccountTest do
   use ExUnit.Case
   alias LiveOdds.Account
 
-
   setup do
-    {:ok, _pid} = Account.start()
+    {:ok, _pid} = Account.start_link()
 
     on_exit(fn() ->
       :ok = Account.stop()
