@@ -9,7 +9,9 @@ defmodule LiveOdds.Supervisor do
 
   def init([]) do
     children = [
-      worker(LiveOdds.Account, []),
+      worker(LiveOdds.Account, [1], [id: 1]),
+      worker(LiveOdds.Account, [2], [id: 2]),
+      worker(LiveOdds.Account, [3], [id: 3]),
       worker(PubSub, []),
     ]
 

@@ -11,9 +11,11 @@ defmodule SupervisorTest do
     assert Process.alive?(pid)
   end
 
-  test "starts Account and PubSub", %{pid: pid} do
+  test "starts 3 Accounts and PubSub", %{pid: pid} do
     [{PubSub, _, _, _},
-     {LiveOdds.Account, _, _, _},
+     {_, _, _, [LiveOdds.Account]},
+     {_, _, _, [LiveOdds.Account]},
+     {_, _, _, [LiveOdds.Account]},
     ] = Supervisor.which_children(pid)
   end
 

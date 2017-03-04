@@ -3,32 +3,36 @@ defmodule LiveOdds.Account do
   A bank account.
   """
 
+  @type account_id :: pos_integer
+
+
   @doc "Open a bank account."
-  @spec start_link() :: {:ok, pid} | {:error, {:already_started, pid} | term}
-  def start_link do
-    Agent.start(fn -> 0 end, [name: :account])
+  @spec start_link(account_id) :: {:ok, pid} | {:error, {:already_started, pid} | term}
+  def start_link(account_id) do
+    name = {__MODULE__, account_id}
+    Agent.start(fn -> 0 end, [name: {:global, name}])
   end
 
 
   @doc "Close a bank account."
-  @spec stop() :: :ok
-  def stop do
-    Agent.stop(:account)
+  @spec stop(account_id) :: :ok
+  def stop(account_id) do
+    Agent.stop({:global, {__MODULE__, account_id}})
   end
 
 
   @doc "Returns the current account balance."
-  @spec balance() :: integer
-  def balance do
-    Agent.get(:account, & &1)
+  @spec balance(account_id) :: integer
+  def balance(account_id) do
+    Agent.get({:global, {__MODULE__, account_id}}, & &1)
   end
 
 
   @doc "Deposit money."
-  @spec credit(pos_integer) :: :ok | :error
-  def credit(amount) do
+  @spec credit(account_id, pos_integer) :: :ok | :error
+  def credit(account_id, amount) do
     if amount > 0 do
-      Agent.update(:account, & &1 + amount)
+      Agent.update({:global, {__MODULE__, account_id}}, & &1 + amount)
     else
       {:error, "not a positive credit"}
     end
@@ -36,9 +40,9 @@ defmodule LiveOdds.Account do
 
 
   @doc "Withdraw money."
-  @spec debit(pos_integer) :: :ok | :error
-  def debit(amount) do
-    Agent.get_and_update(:account, fn(balance) ->
+  @spec debit(account_id, pos_integer) :: :ok | :error
+  def debit(account_id, amount) do
+    Agent.get_and_update({:global, {__MODULE__, account_id}}, fn balance ->
       case amount > balance do
         true -> {{:error, "not enough money"}, balance}
         false -> {:ok, balance - amount}
